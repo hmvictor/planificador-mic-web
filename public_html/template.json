@@ -1,0 +1,21 @@
+{
+    "formato": ["dia", "sala", "pelicula"],
+    "descripcion": "Descripción",
+    "peliculas": [
+        {
+            "alias": "alias",
+            "nombre": "Película",
+            "duracion": 86
+        }
+    ],
+    "programacion": {
+        "2020-01-01": {
+            "Sala 1": {
+                "alias": [
+                    "13:00", 
+                    "15:00"
+                ]
+            }
+        }
+    }
+}

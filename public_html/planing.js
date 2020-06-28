@@ -33,87 +33,74 @@ class DataSet {
         return null;
     }
     
+    iterate(fn) {
+        let value={
+            
+        };
+        for(let key1 in this.content.programacion) {
+            if(this.content.formato[0] === "pelicula") {
+                value.nombrePelicula=key1;
+            }
+            if(this.content.formato[0] === "dia") {
+                value.dia=key1;
+            }
+            for(let key2 in this.content.programacion[key1]) {
+                if(this.content.formato[1] === "pelicula") {
+                    value.nombrePelicula=key2;
+                }
+                if(this.content.formato[1] === "dia") {
+                    value.dia=key2;
+                }
+                if(this.content.formato[1] === "sala") {
+                    value.sala=key2;
+                }
+                for(let key3 in this.content.programacion[key1][key2]) {
+                    if(this.content.formato[2] === "pelicula") {
+                        value.nombrePelicula=key3;
+                    }
+                    if(this.content.formato[2] === "sala") {
+                        value.sala=key3;
+                    }
+                    fn.apply(null, [value, this.content.programacion[key1][key2][key3]]);
+                }
+            }
+        }
+    }
+    
     getLimits(date) {
         let limits={
             min:10000,
             max:-1
         };
         
-        let nombrePelicula;
-        let dia;
-        for(let key1 in this.content.programacion) {
-            if(this.content.formato[0] === "pelicula") {
-                nombrePelicula=key1;
-            }
-            if(this.content.formato[0] === "dia") {
-                dia=key1;
-            }
-            for(let key2 in this.content.programacion[key1]) {
-                if(this.content.formato[1] === "pelicula") {
-                    nombrePelicula=key2;
-                }
-                if(this.content.formato[1] === "dia") {
-                    dia=key2;
-                }
-                for(let key3 in this.content.programacion[key1][key2]) {
-                    if(this.content.formato[2] === "pelicula") {
-                        nombrePelicula=key3;
+        this.iterate((row, horarios) => {
+            if(row.dia === date) {
+                for(let horario of horarios) {
+                    let hora=parseHora(horario);
+                    if(limits.min > hora) {
+                        limits.min = hora;
                     }
-                    if(dia === date) {
-                        for(let horario of this.content.programacion[key1][key2][key3]) {
-                            let hora=parseHora(horario);
-                            if(limits.min > hora) {
-                                limits.min = hora;
-                            }
-                            if(limits.max < (hora+this.getPelicula(nombrePelicula).duracion)) {
-                                limits.max = hora+this.getPelicula(nombrePelicula).duracion;
-                            }
-                        }
+                    if(limits.max < (hora+this.getPelicula(row.nombrePelicula).duracion)) {
+                        limits.max = hora+this.getPelicula(row.nombrePelicula).duracion;
                     }
                 }
             }
-        }
+        });
+        limits.min=limits.min - limits.min % 30;
+        limits.max=limits.max + (60-limits.max % 30);
         return limits;
     }
     
     getProgramacionPorDiaYSala(date) {
-        let sala;
-        let nombrePelicula;
-        let dia;
         let programacionPorDiaYSala={};
-        for(let key1 in this.content.programacion) {
-            if(this.content.formato[0] === "pelicula") {
-                nombrePelicula=key1;
+        this.iterate((row, horarios) => {
+            if(row.dia === date) {
+                if(!(programacionPorDiaYSala[row.sala])){
+                    programacionPorDiaYSala[row.sala]={};
+                }
+                programacionPorDiaYSala[row.sala][row.nombrePelicula]=horarios;
             }
-            if(this.content.formato[0] === "dia") {
-                dia=key1;
-            }
-            for(let key2 in this.content.programacion[key1]) {
-                if(this.content.formato[1] === "pelicula") {
-                    nombrePelicula=key2;
-                }
-                if(this.content.formato[1] === "dia") {
-                    dia=key2;
-                }
-                if(this.content.formato[1] === "sala") {
-                    sala=key2;
-                }
-                for(let key3 in this.content.programacion[key1][key2]) {
-                    if(this.content.formato[2] === "pelicula") {
-                        nombrePelicula=key3;
-                    }
-                    if(this.content.formato[2] === "sala") {
-                        sala=key3;
-                    }
-                    if(dia === date) {
-                        if(!(programacionPorDiaYSala[sala])){
-                            programacionPorDiaYSala[sala]={};
-                        }
-                        programacionPorDiaYSala[sala][nombrePelicula]=this.content.programacion[key1][key2][key3];
-                    }
-                }
-            }
-        }
+        });
         return programacionPorDiaYSala;
     }
     
