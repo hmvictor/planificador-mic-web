@@ -1,0 +1,31 @@
+{
+    "formato": ["dia", "sala", "pelicula"],
+    "descripcion": "Muestra Internacional de Cine",
+    "peliculas": [
+        {
+            "alias": "Camarista",
+            "nombre": "La Camarista",
+            "director": "",
+            "pais": "México",
+            "duracion": 86
+        }
+    ],
+    "programacion": {
+        "2020-01-01": {
+            "Sala 1": {
+                "La Camarista": ["13:00", "15:00"]
+            },
+            "Sala 2": {
+                "La Camarista": ["12:00", "17:00"]
+            }
+        },
+        "2020-01-02": {
+            "Sala 1": {
+                "La Camarista": ["11:00", "16:00"]
+            },
+            "Sala 2": {
+                "La Camarista": ["13:00", "20:00"]
+            }
+        }
+    }
+}
