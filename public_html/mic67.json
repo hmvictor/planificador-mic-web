@@ -1,6 +1,6 @@
 {
     "formato": ["dia", "sala", "pelicula"],
-    "descripcion": "Descripción",
+    "descripcion": "Muestra Internacional de Cine 67 - Noviembre 2019",
     "peliculas": [
         {
             "alias": "Berlín",
