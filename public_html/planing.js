@@ -18,9 +18,9 @@ function parseHora(text) {
 class DataSet {
     
     constructor(data) {
-//        "formato": ["dia", "sala", "pelicula"],
-//        "formato": ["dia", "pelicula", "sala"],
-//        "formato": ["pelicula", "dia", "sala"],
+//        "estructura": ["dia", "sala", "pelicula"],
+//        "estructura": ["dia", "pelicula", "sala"],
+//        "estructura": ["pelicula", "dia", "sala"],
         this.content=data;
     }
     
@@ -38,27 +38,27 @@ class DataSet {
             
         };
         for(let key1 in this.content.programacion) {
-            if(this.content.formato[0] === "pelicula") {
+            if(this.content.estructura[0] === "pelicula") {
                 value.nombrePelicula=key1;
             }
-            if(this.content.formato[0] === "dia") {
+            if(this.content.estructura[0] === "dia") {
                 value.dia=key1;
             }
             for(let key2 in this.content.programacion[key1]) {
-                if(this.content.formato[1] === "pelicula") {
+                if(this.content.estructura[1] === "pelicula") {
                     value.nombrePelicula=key2;
                 }
-                if(this.content.formato[1] === "dia") {
+                if(this.content.estructura[1] === "dia") {
                     value.dia=key2;
                 }
-                if(this.content.formato[1] === "sala") {
+                if(this.content.estructura[1] === "sala") {
                     value.sala=key2;
                 }
                 for(let key3 in this.content.programacion[key1][key2]) {
-                    if(this.content.formato[2] === "pelicula") {
+                    if(this.content.estructura[2] === "pelicula") {
                         value.nombrePelicula=key3;
                     }
-                    if(this.content.formato[2] === "sala") {
+                    if(this.content.estructura[2] === "sala") {
                         value.sala=key3;
                     }
                     fn.apply(null, [value, this.content.programacion[key1][key2][key3]]);
