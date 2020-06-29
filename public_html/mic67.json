@@ -1,0 +1,534 @@
+{
+    "formato": ["dia", "sala", "pelicula"],
+    "descripcion": "Descripción",
+    "peliculas": [
+        {
+            "alias": "Berlín",
+            "nombre": "Esto no es Berlín",
+            "duracion": "01:55"
+        },
+        {
+            "alias": "UnDiaLluvioso",
+            "nombre": "Un día lluvioso en Nueva York",
+            "duracion": "01:35"
+        },
+        {
+            "alias": "DulceVida",
+            "nombre": "La dulce vida",
+            "duracion": 175
+        },
+        {
+            "alias": "Ahmed",
+            "nombre": "El joven Ahmed",
+            "duracion": 84
+        },
+        {
+            "alias": "PorLaGracia",
+            "nombre": "Por la gracia de dios",
+            "duracion": 137
+        },
+        {
+            "alias": "Giles",
+            "nombre": "La odisea de los Giles",
+            "duracion": 116
+        },
+        {
+            "alias": "Dogman",
+            "nombre": "El despertar de la fiera: Dogman",
+            "duracion": 102
+        },
+        {
+            "alias": "DiabloEntreLasPiernas",
+            "nombre": "El diablo entre las piernas",
+            "duracion": 147
+        },
+        {
+            "alias": "Varda",
+            "nombre": "Varda por Agnès",
+            "duracion": 115
+        },
+        {
+            "alias": "Genesis",
+            "nombre": "Genesis 2.0",
+            "duracion": 112
+        },
+        {
+            "alias": "ReinaCorazones",
+            "nombre": "Reina de corazones",
+            "duracion": 127
+        },
+        {
+            "alias": "Papicha",
+            "nombre": "Papicha niña hermosa",
+            "duracion": 106
+        },
+        {
+            "alias": "RayYLiz",
+            "nombre": "Ray y Liz",
+            "duracion": 107
+        },
+        {
+            "alias": "Bacurau",
+            "nombre": "Bacurau tierra de nadie",
+            "duracion": 132
+        }
+    ],
+    "programacion": {
+        "2019-11-15": {
+            "Sala 1": {
+                "Berlín": [
+                    "16:00", 
+                    "21:00"
+                ],
+                "UnDiaLluvioso": [
+                    "12:00", 
+                    "18:30"
+                ]
+            }
+        },
+        "2019-11-16": {
+            "Sala 1": {
+                "Berlín": [
+                    "12:00", 
+                    "18:30"
+                ],
+                "UnDiaLluvioso": [
+                    "16:00", 
+                    "21:00"
+                ]
+            }
+        },
+        "2019-11-17": {
+            "Sala 1": {
+                "Berlín": [
+                    "15:30", 
+                    "20:30"
+                ],
+                "UnDiaLluvioso": [
+                    "12:30", 
+                    "18:00"
+                ]
+            },
+            "Sala 2": {
+                "DulceVida": [
+                    "11:45", 
+                    "17:30"
+                ],
+                "Ahmed": [
+                    "15:15", 
+                    "21:00"
+                ]
+            }
+        },
+        "2019-11-18": {
+            "Sala 1": {
+                "Berlín": [
+                    "12:00", 
+                    "18:30"
+                ],
+                "UnDiaLluvioso": [
+                    "16:00", 
+                    "21:00"
+                ]
+            },
+            "Sala 2": {
+                "DulceVida": [
+                    "14:45", 
+                    "20:30"
+                ],
+                "Ahmed": [
+                    "12:30", 
+                    "18:15"
+                ]
+            }
+        },
+        "2019-11-19": {
+            "Sala 1": {
+                "Berlín": [
+                    "15:30", 
+                    "20:30"
+                ],
+                "UnDiaLluvioso": [
+                    "12:30", 
+                    "18:00"
+                ]
+            },
+            "Sala 2": {
+                "DulceVida": [
+                    "11:45", 
+                    "17:30"
+                ],
+                "Ahmed": [
+                    "15:15", 
+                    "21:00"
+                ]
+            },
+            "Sala 3": {
+                "PorLaGracia": [
+                    "12:00",
+                    "17:45"
+                ],
+                "Giles": [
+                    "15:00",
+                    "20:45"
+                ]
+            }
+        },
+        "2019-11-20": {
+            "Sala 1": {
+                "Berlín": [
+                    "12:00",
+                    "18:30"
+                ],
+                "UnDiaLluvioso": [
+                    "16:00",
+                    "21:00"
+                ]
+            },
+            "Sala 2": {
+                "DulceVida": [
+                    "14:45",
+                    "20:30"
+                ],
+                "Ahmed": [
+                    "12:30",
+                    "18:15"
+                ]
+            },
+            "Sala 3": {
+                "PorLaGracia": [
+                    "15:00",
+                    "20:45"
+                ],
+                "Giles": [
+                    "12:15",
+                    "18:00"
+                ]
+            }
+        },
+        "2019-11-21": {
+            "Sala 2": {
+                "DulceVida": [
+                    "11:45",
+                    "17:30"
+                ],
+                "Ahmed": [
+                    "15:15",
+                    "21:00"
+                ]
+            },
+            "Sala 3": {
+                "PorLaGracia": [
+                    "12:00",
+                    "17:45"
+                ],
+                "Giles": [
+                    "15:00",
+                    "20:45"
+                ]
+            },
+            "Sala 1": {
+                "Dogman" : [
+                    "12:15",
+                    "18:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "14:45",
+                    "20:30"
+                ]
+            }
+        },
+        "2019-11-22": {
+            "Sala 2": {
+                "DulceVida": [
+                    "14:45",
+                    "20:30"
+                ],
+                "Ahmed": [
+                    "12:30",
+                    "18:15"
+                ]
+            },
+            "Sala 3": {
+                "PorLaGracia": [
+                    "15:00",
+                    "20:45"
+                ],
+                "Giles": [
+                    "12:15",
+                    "18:00"
+                ]
+            },
+            "Sala 1": {
+                "Dogman" : [
+                    "15:15",
+                    "21:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "12:00",
+                    "17:45"
+                ]
+            }
+        },
+        "2019-11-23": {
+            "Sala 3": {
+                "PorLaGracia": [
+                    "12:00",
+                    "17:45"
+                ],
+                "Giles": [
+                    "15:00",
+                    "20:45"
+                ]
+            },
+            "Sala 1": {
+                "Dogman" : [
+                    "12:15",
+                    "18:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "14:45",
+                    "20:30"
+                ]
+            },
+            "Sala 2": {
+                "Varda": [
+                    "12:30",
+                    "18:30"
+                ],
+                "Genesis": [
+                    "16:00",
+                    "21:00"
+                ]
+            }
+        },
+        "2019-11-24": {
+            "Sala 3": {
+                "PorLaGracia": [
+                    "15:00",
+                    "20:45"
+                ],
+                "Giles": [
+                    "12:15",
+                    "18:00"
+                ]
+            },
+            "Sala 1": {
+                "Dogman" : [
+                    "15:15",
+                    "21:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "12:00",
+                    "17:45"
+                ]
+            },
+            "Sala 2": {
+                "Varda": [
+                    "14:45",
+                    "20:30"
+                ],
+                "Genesis": [
+                    "12:30",
+                    "17:30"
+                ]
+            }
+        },
+        "2019-11-25": {
+            "Sala 1": {
+                "Dogman" : [
+                    "12:15",
+                    "18:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "14:45",
+                    "20:30"
+                ]
+            },
+            "Sala 2": {
+                "Varda": [
+                    "12:30",
+                    "18:30"
+                ],
+                "Genesis": [
+                    "16:00",
+                    "21:00"
+                ]
+            },
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "15:30",
+                    "20:45"
+                ],
+                "Papicha": [
+                    "12:00",
+                    "18:15"
+                ]
+            }
+        },
+        "2019-11-26": {
+            "Sala 1": {
+                "Dogman" : [
+                    "15:15",
+                    "21:00"
+                ],
+                "DiabloEntreLasPiernas": [
+                    "12:00",
+                    "17:45"
+                ]
+            },
+            "Sala 2": {
+                "Varda": [
+                    "12:30",
+                    "18:30"
+                ],
+                "Genesis": [
+                    "16:00",
+                    "21:00"
+                ]
+            },
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "12:45",
+                    "18:00"
+                ],
+                "Papicha": [
+                    "15:30",
+                    "20:45"
+                ]
+            }
+        },
+        "2019-11-27": {
+            "Sala 2": {
+                "Varda": [
+                    "12:30",
+                    "18:30"
+                ],
+                "Genesis": [
+                    "16:00",
+                    "21:00"
+                ]
+            },
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "15:30",
+                    "20:45"
+                ],
+                "Papicha": [
+                    "12:00",
+                    "18:15"
+                ]
+            },
+            "Sala 1": {
+                "RayYLiz": [
+                    "12:15",
+                    "18:00"
+                ],
+                "Bacurau": [
+                    "15:00",
+                    "20:30"
+                ]
+            }
+        },
+        "2019-11-28": {
+            "Sala 2": {
+                "Varda": [
+                    "15:00",
+                    "20:30"
+                ],
+                "Genesis": [
+                    "12:30",
+                    "17:30"
+                ]
+            },
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "12:45",
+                    "18:00"
+                ],
+                "Papicha": [
+                    "15:30",
+                    "20:45"
+                ]
+            },
+            "Sala 1": {
+                "RayYLiz": [
+                    "16:00",
+                    "21:00"
+                ],
+                "Bacurau": [
+                    "12:15",
+                    "18:15"
+                ]
+            }
+        },
+        "2019-11-29": {
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "15:30",
+                    "20:45"
+                ],
+                "Papicha": [
+                    "12:00",
+                    "18:15"
+                ]
+            },
+            "Sala 1": {
+                "RayYLiz": [
+                    "12:15",
+                    "18:00"
+                ],
+                "Bacurau": [
+                    "15:00",
+                    "20:30"
+                ]
+            }
+        },
+        "2019-11-30": {
+            "Sala 3": {
+                "ReinaCorazones": [
+                    "12:45",
+                    "18:00"
+                ],
+                "Papicha": [
+                    "15:45",
+                    "20:45"
+                ]
+            },
+            "Sala 1": {
+                "RayYLiz": [
+                    "15:45",
+                    "21:00"
+                ],
+                "Bacurau": [
+                    "12:15",
+                    "18:15"
+                ]
+            }
+        },
+        "2019-12-01": {
+            "Sala 1": {
+                "RayYLiz": [
+                    "12:15",
+                    "18:00"
+                ],
+                "Bacurau": [
+                    "15:00",
+                    "20:30"
+                ]
+            }
+        },
+        "2019-12-02": {
+            "Sala 1": {
+                "RayYLiz": [
+                    "15:45",
+                    "21:00"
+                ],
+                "Bacurau": [
+                    "12:15",
+                    "18:15"
+                ]
+            }
+        }
+    }
+}

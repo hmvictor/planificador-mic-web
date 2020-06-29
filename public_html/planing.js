@@ -1,5 +1,5 @@
 function duration(hour, minute) {
-        return hour*60+minute;
+    return hour*60+minute;
 }
     
 function pad2(value) {
@@ -80,8 +80,10 @@ class DataSet {
                     if(limits.min > hora) {
                         limits.min = hora;
                     }
-                    if(limits.max < (hora+this.getPelicula(row.nombrePelicula).duracion)) {
-                        limits.max = hora+this.getPelicula(row.nombrePelicula).duracion;
+                    let pelicula=this.getPelicula(row.nombrePelicula);
+                    let duracionPelicula=typeof pelicula.duracion === "string"? parseHora(pelicula.duracion): pelicula.duracion;
+                    if(limits.max < (hora+duracionPelicula)) {
+                        limits.max = hora+duracionPelicula;
                     }
                 }
             }
@@ -108,44 +110,57 @@ class DataSet {
 
 jQuery(function($) {
     let dataSet;
-    let data;
     $("select").on("change", function() {
         let url=$(this).val();
-        $.ajax({
-            url: url,
-            method: "GET",
-            type: "json"
-        }).then(function(d){
-            data=d;
-            dataSet=new DataSet(d);
-            $("h1").html(d.descripcion);
-            let minDate=new Date(2100, 11, 31);
-            let maxDate=new Date(1900, 0, 1);
-            for(let fecha in d.programacion) {
-                var parts =fecha.split('-');
-                var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
-                if(mydate.getTime() < minDate.getTime()) {
-                    minDate=mydate;
+        if(url.length !== 0) {
+            $.ajax({
+                url: url,
+                method: "GET",
+                type: "json"
+            }).then(function(d){
+                dataSet=new DataSet(d);
+                $("h1").html(d.descripcion);
+                let minDate=new Date(2100, 11, 31);
+                let maxDate=new Date(1900, 0, 1);
+                for(let fecha in d.programacion) {
+                    var parts =fecha.split('-');
+                    var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+                    if(mydate.getTime() < minDate.getTime()) {
+                        minDate=mydate;
+                    }
+                    if(mydate.getTime() > maxDate.getTime()) {
+                        maxDate=mydate;
+                    }
                 }
-                if(mydate.getTime() > maxDate.getTime()) {
-                    maxDate=mydate;
-                }
-            }
-            $("input[type=date]").attr("min", minDate.getFullYear()+"-"+pad2(minDate.getMonth()+1)+"-"+pad2(minDate.getDate()));
-            $("input[type=date]").attr("max", maxDate.getFullYear()+"-"+pad2(maxDate.getMonth()+1)+"-"+pad2(maxDate.getDate()));
-            $("input[type=date]").attr("disabled", false)
-        });
+                $("input[type=date]").attr("min", minDate.getFullYear()+"-"+pad2(minDate.getMonth()+1)+"-"+pad2(minDate.getDate()));
+                $("input[type=date]").attr("max", maxDate.getFullYear()+"-"+pad2(maxDate.getMonth()+1)+"-"+pad2(maxDate.getDate()));
+                $("input[type=date]").attr("disabled", false);
+            });
+        }else{
+            $("input[type=date]").attr("disabled", true);
+            $("h1").html("");
+        }
+        $("input[type=date]").val("");
+        clear(canvas);
     });
         
-    var canvas = document.getElementById('canvas');
     
     $("input[type=date]").on("change", function(){
         paint(canvas, $("input[type=date]").val());
     });
     $("input[type=date]").attr("disabled", true);
+    
+    var canvas = document.getElementById('canvas');
+    canvas.width  = $("div.container").width();
+//    canvas.height = window.innerHeight;
     if(canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        
+        function clear(canvas) {
+            ctx.clearRect(0, 0, $(canvas).width(), $(canvas).height());
+        }
+        
         function paint(canvas, date) {
-            var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, $(canvas).width(), $(canvas).height());
         
             let programacionPorDiaYSala=dataSet.getProgramacionPorDiaYSala(date);
@@ -163,6 +178,8 @@ jQuery(function($) {
             let widthScale=$(canvas).width()/(limits.max-limits.min);
             let fontHeight=10;
             let offsetY=fontHeight+5*2;
+            let rowHeight=80;
+            
 
             function getScaledX(sourceX, scale, labelWidth) {
                 return (sourceX-limits.min)*scale+labelWidth;
@@ -189,47 +206,55 @@ jQuery(function($) {
                 ctx.restore();
             }
 
-            let colors=[{
-                fill: "rgba(146, 196, 102, 0.8)",
-                border: "rgb(72, 99, 57)"
-            },{
-                fill: "rgba(140, 172, 209, 0.8)",
-                border: "rgb(40, 63, 76)"
-            },{
-                fill: "rgba(242, 98, 70, 0.8)",
-                border: "rgb(104, 36, 19)"
-            }];
-
-            drawTimeLines(ctx);
-
-            let y=0;
-            for (let sala in programacionPorDiaYSala) {
-                for(let nombrePelicula in programacionPorDiaYSala[sala]) {
-                    for(let horario of programacionPorDiaYSala[sala][nombrePelicula]) {
-                        ctx.fillStyle=colors[y%colors.length].fill;
-                        ctx.strokeStyle=colors[y%colors.length].border;
-                        let pelicula=dataSet.getPelicula(nombrePelicula);
-                        ctx.fillRect(getScaledX(parseHora(horario), widthScale, labelWidth), y*60+offsetY, pelicula.duracion*widthScale, 60);
-                        ctx.strokeRect(getScaledX(parseHora(horario), widthScale, labelWidth), y*60+offsetY, pelicula.duracion*widthScale, 60);
-
-                        ctx.fillStyle="black";
-                        let metrics=ctx.measureText(pelicula.nombre);
-                        ctx.fillText(pelicula.nombre, getScaledX(parseHora(horario), widthScale, labelWidth)+(pelicula.duracion*widthScale-metrics.width)/2, y*60+offsetY+30-2);
-                        let intervalo=horario +"-"+durationToString(parseHora(horario)+pelicula.duracion);
-                        metrics=ctx.measureText(intervalo);
-                        ctx.fillText(intervalo, getScaledX(parseHora(horario), widthScale, labelWidth)+(pelicula.duracion*widthScale-metrics.width)/2, y*60+offsetY+60/2+fontHeight+2);
+            function drawIntervals() {
+                let colors=[
+                    {
+                        fill: "rgba(146, 196, 102, 0.8)",
+                        border: "rgb(72, 99, 57)"
+                    },
+                    {
+                        fill: "rgba(140, 172, 209, 0.8)",
+                        border: "rgb(40, 63, 76)"
+                    },
+                    {
+                        fill: "rgba(242, 98, 70, 0.8)",
+                        border: "rgb(104, 36, 19)"
                     }
-                }
-                y++;
-            }
+                ];
+                
+                let y=0;
+                for (let sala in programacionPorDiaYSala) {
+                    for(let nombrePelicula in programacionPorDiaYSala[sala]) {
+                        for(let horario of programacionPorDiaYSala[sala][nombrePelicula]) {
+                            ctx.fillStyle=colors[y%colors.length].fill;
+                            ctx.strokeStyle=colors[y%colors.length].border;
+                            let pelicula=dataSet.getPelicula(nombrePelicula);
+                            var duracionPelicula= typeof pelicula.duracion === "string"? parseHora(pelicula.duracion) : pelicula.duracion;
+                            ctx.fillRect(getScaledX(parseHora(horario), widthScale, labelWidth), y*rowHeight+offsetY, duracionPelicula*widthScale, rowHeight);
+                            ctx.strokeRect(getScaledX(parseHora(horario), widthScale, labelWidth), y*rowHeight+offsetY, duracionPelicula*widthScale, rowHeight);
 
-            y=0;
-            ctx.fillStyle="black";
-            for (let sala in programacionPorDiaYSala) {
-                let metrics=ctx.measureText(sala);
-                ctx.fillText(sala, (labelWidth-metrics.width)/2, y*60+30+fontHeight/2+offsetY);
-                y++;
+                            ctx.fillStyle="black";
+                            let metrics=ctx.measureText(pelicula.nombre);
+                            ctx.fillText(pelicula.nombre, getScaledX(parseHora(horario), widthScale, labelWidth)+(duracionPelicula*widthScale-metrics.width)/2, y*rowHeight+offsetY+rowHeight/2-2);
+                            let intervalo=horario +"-"+durationToString(parseHora(horario)+duracionPelicula);
+                            metrics=ctx.measureText(intervalo);
+                            ctx.fillText(intervalo, getScaledX(parseHora(horario), widthScale, labelWidth)+(duracionPelicula*widthScale-metrics.width)/2, y*rowHeight+offsetY+rowHeight/2+fontHeight+2);
+                        }
+                    }
+                    y++;
+                }
+
+                y=0;
+                ctx.fillStyle="black";
+                for (let sala in programacionPorDiaYSala) {
+                    let metrics=ctx.measureText(sala);
+                    ctx.fillText(sala, (labelWidth-metrics.width)/2, y*rowHeight+rowHeight/2+fontHeight/2+offsetY);
+                    y++;
+                }
             }
+            
+            drawTimeLines(ctx);
+            drawIntervals();
             
         }
     }

@@ -1,6 +1,6 @@
 {
     "formato": ["dia", "sala", "pelicula"],
-    "descripcion": "Muestra Internacional de Cine",
+    "descripcion": "Data Test",
     "peliculas": [
         {
             "alias": "Camarista",
